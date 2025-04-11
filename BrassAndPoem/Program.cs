@@ -81,12 +81,12 @@ DisplayMenu();
     {
         AddProduct(products, productTypes);
     }
-    // else if (choice == "4") {
-    //     UpdateProduct();
-    // }
-    // }
-    // else if (choice == "5") {
-    //     
+    else if (choice == "4") {
+        UpdateProduct(products, productTypes);
+    }
+    else if (choice == "5") {
+        Console.WriteLine("Goodbye!");
+}
 }
 
 
@@ -159,7 +159,62 @@ void UpdateProduct(List<Product> products, List<ProductType> productTypes)
 
     Product updatedProduct = null;
 
-    foreach(Product product)
+    foreach(Product product in products)
+    updatedProduct = products[updateInput - 1];
+    
+
+    Console.WriteLine("Enter new name of product");
+    string newName = Console.ReadLine();
+
+     if (string.IsNullOrWhiteSpace(newName))
+    {
+        updatedProduct.Name = updatedProduct.Name;
+    }
+    else {
+        updatedProduct.Name = newName;
+    }
+
+
+    Console.WriteLine("Enter new cost of price (with decimal)");
+    string newPrice = Console.ReadLine();
+    
+
+    if(string.IsNullOrEmpty(newPrice))
+    {
+        updatedProduct.Price = updatedProduct.Price;
+    }
+    else {
+        decimal priceInput = decimal.Parse(newPrice);
+        updatedProduct.Price = priceInput;
+    }
+
+
+    foreach( ProductType product in productTypes)
+    {
+        Console.WriteLine(product.Id + ". " + product.Title);
+    }
+   
+   
+    Console.WriteLine("Enter a Type Number:");
+
+    string newType = Console.ReadLine();
+    
+    if (string.IsNullOrEmpty(newType)) 
+    {
+        updatedProduct.ProductTypeId = updatedProduct.ProductTypeId;
+    }
+    else
+    {
+        int typeInput = int.Parse(newType);
+        updatedProduct.ProductTypeId = typeInput;
+    }
+
+  
+
+
+
+    
+    
 }
 
 // don't move or change this!
