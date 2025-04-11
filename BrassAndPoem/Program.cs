@@ -9,7 +9,7 @@ List<Product> products = new List<Product>()
     new Product {
         Name = "Trumpet",
         Price = 150.99M,
-        ProductTypeId = 1
+        ProductTypeId = 2
 
     },
 
@@ -108,7 +108,7 @@ void DisplayAllProducts(List<Product> products, List<ProductType> productTypes)
         Product currentProduct = products[i];
         List<ProductType> selectedType = productTypes.Where(item => item.Id == currentProduct.ProductTypeId).ToList();
         foreach(ProductType type in selectedType)
-        Console.WriteLine($"{i + 1}. Name:-{currentProduct.Name}-Price:{currentProduct.Price}-Product Type:{type.Title}-");
+        Console.WriteLine($"{i + 1}. Name:-{currentProduct.Name}-Price:{currentProduct.Price}-ProductType:{type.Title}-");
     }
     
     
@@ -150,10 +150,17 @@ void AddProduct(List<Product> products, List<ProductType> productTypes)
 
 }
 
-// void UpdateProduct(List<Product> products, List<ProductType> productTypes)
-// {
-//     throw new NotImplementedException();
-// }
+void UpdateProduct(List<Product> products, List<ProductType> productTypes)
+{
+    DisplayAllProducts(products, productTypes);
+    Console.WriteLine("Enter the product number you would like to update");
+
+    int updateInput = int.Parse(Console.ReadLine());
+
+    Product updatedProduct = null;
+
+    foreach(Product product)
+}
 
 // don't move or change this!
 public partial class Program { }
