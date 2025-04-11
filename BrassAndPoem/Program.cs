@@ -5,6 +5,14 @@ using System.Runtime.InteropServices;
 
 List<Product> products = new List<Product>()
 {
+
+    new Product {
+        Name = "Trumpet",
+        Price = 150.99M,
+        ProductTypeId = 1
+
+    },
+
     new Product()
     {
         Name = "The Odyssey",
@@ -34,11 +42,8 @@ List<Product> products = new List<Product>()
         ProductTypeId = 2
     },
 
-    new Product {
-        Name = "French Horn",
-        Price = 500.00M,
-        ProductTypeId = 2
-    }
+
+    
 };
     
 //create a "productTypes" variable here with a List of ProductTypes, and add "Brass" and "Poem" types to the List. 
@@ -70,18 +75,18 @@ DisplayMenu();
     }
     else if (choice == "2")
     {
-        
+      DeleteProduct(products, productTypes);  
     }
-    else if (choice == "3");
+    else if (choice == "3")
     {
-        DeleteProduct(products, productTypes);
+        AddProduct(products, productTypes);
     }
     // else if (choice == "4") {
-    //     AddProduct();
-    // }
-    // else if (choice == "5") {
     //     UpdateProduct();
     // }
+    // }
+    // else if (choice == "5") {
+    //     
 }
 
 
@@ -103,7 +108,7 @@ void DisplayAllProducts(List<Product> products, List<ProductType> productTypes)
         Product currentProduct = products[i];
         List<ProductType> selectedType = productTypes.Where(item => item.Id == currentProduct.ProductTypeId).ToList();
         foreach(ProductType type in selectedType)
-        Console.WriteLine($"{i + 1}. {products[i].Name} {products[i].Price} {type.Title}");
+        Console.WriteLine($"{i + 1}. Name:-{currentProduct.Name}-Price:{currentProduct.Price}-Product Type:{type.Title}-");
     }
     
     
@@ -111,13 +116,39 @@ void DisplayAllProducts(List<Product> products, List<ProductType> productTypes)
 
 void DeleteProduct(List<Product> products, List<ProductType> productTypes)
 {
-    
+    DisplayAllProducts(products, productTypes);
+    Console.WriteLine($"Enter The Number of the product you want to delete");
+   int index = int.Parse(Console.ReadLine());
+   products.RemoveAt(index - 1);
+
 }
 
-// void AddProduct(List<Product> products, List<ProductType> productTypes)
-// {
-//     throw new NotImplementedException();
-// }
+void AddProduct(List<Product> products, List<ProductType> productTypes)
+{
+    Console.WriteLine("Enter the name of the new product");
+    string Name = Console.ReadLine();
+   
+    Console.WriteLine("Enter the name of the new price (with decimal)");
+    string Price = Console.ReadLine();
+    decimal priceInput = 0;
+    priceInput = decimal.Parse(Price);
+
+    foreach( ProductType product in productTypes)
+    {
+        Console.WriteLine(product.Id + ". " + product.Title);
+    }
+    Console.WriteLine("Enter a Type:");
+    int ProductTypeId = int.Parse(Console.ReadLine());
+
+    Product newProduct = new Product()
+    {
+        Name = Name,
+        Price = priceInput,
+        ProductTypeId = ProductTypeId,
+    };
+    products.Add(newProduct);
+
+}
 
 // void UpdateProduct(List<Product> products, List<ProductType> productTypes)
 // {
